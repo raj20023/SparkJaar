@@ -49,7 +49,7 @@ h1, h2, h3 {
 
 /* Navbar */
 .navbar {
-    padding: 1.5rem 0;
+    padding: 0.5rem 0; /* Reduced padding */
     position: fixed;
     width: 100%;
     top: 0;
@@ -67,7 +67,8 @@ h1, h2, h3 {
 
 .logo img {
     height: auto;
-    width: 280px; /* Force it to be much wider */
+    width: 220px; 
+    margin: -40px 0 -40px -15px; /* Negative margins to cancel out the transparent padding in the image file */
     display: block;
 }
 
