@@ -49,7 +49,9 @@ h1, h2, h3 {
 
 /* Navbar */
 .navbar {
-    padding: 0.5rem 0; /* Reduced padding */
+    height: 90px; /* Fixed height to stop the blur from expanding */
+    display: flex;
+    align-items: center;
     position: fixed;
     width: 100%;
     top: 0;
@@ -60,15 +62,21 @@ h1, h2, h3 {
 }
 
 .nav-container {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
     height: auto;
-    width: 220px; 
-    margin: -40px 0 -40px -15px; /* Negative margins to cancel out the transparent padding in the image file */
+    width: 240px; 
+    margin-left: -20px; /* Offset just the left padding slightly */
     display: block;
 }
 
@@ -113,7 +121,7 @@ h1, h2, h3 {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 80px; /* Space for navbar */
+    padding-top: 140px; /* Extra space to completely clear the navbar */
 }
 
 .hero-container {
