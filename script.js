@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('waitlist');
     
     // TODO: Replace this with your actual Formspree endpoint URL
-    const FORMSPREE_URL = 'YOUR_FORMSPREE_ENDPOINT_HERE'; 
+    const FORMSPREE_URL = 'https://formspree.io/f/mwvyoaqd'; 
     
     if (form) {
         form.addEventListener('submit', async (e) => {
