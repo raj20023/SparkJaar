@@ -66,7 +66,8 @@ h1, h2, h3 {
 }
 
 .logo img {
-    height: 80px; /* Increased for better visibility */
+    height: auto;
+    width: 280px; /* Force it to be much wider */
     display: block;
 }
 
@@ -465,9 +466,10 @@ h1, h2, h3 {
 }
 
 .footer-logo {
-    height: 50px;
-    margin-bottom: 1rem;
-    opacity: 0.5;
+    height: auto;
+    width: 200px; /* Make footer logo clearly visible too */
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
     transition: opacity 0.3s ease;
 }
 
