@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.resources) {
                     data.resources.forEach(res => {
                         const row = document.createElement('tr');
-                        const shareableUrl = `${window.location.origin}/?resource=${encodeURIComponent(res.slug)}`;
+                        const shareableUrl = `${window.location.origin}/claim.html?resource=${encodeURIComponent(res.slug)}`;
                         row.innerHTML = `
                             <td>
                                 <strong>${res.slug}</strong><br>
