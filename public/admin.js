@@ -71,9 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.resources) {
                     data.resources.forEach(res => {
                         const row = document.createElement('tr');
+                        const shareableUrl = `${window.location.origin}/?resource=${encodeURIComponent(res.slug)}`;
                         row.innerHTML = `
-                            <td>${res.slug}</td>
-                            <td><a href="${res.driveUrl}" target="_blank">Link</a></td>
+                            <td>
+                                <strong>${res.slug}</strong><br>
+                                <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                                    <input type="text" value="${shareableUrl}" readonly style="font-size: 0.8em; padding: 2px 5px; background: rgba(0,0,0,0.1); border: 1px solid #ccc; width: 250px;">
+                                    <button class="btn btn-outline" style="padding: 2px 5px; font-size: 0.8em;" onclick="navigator.clipboard.writeText('${shareableUrl}'); alert('Link copied to clipboard!')">Copy</button>
+                                </div>
+                            </td>
+                            <td><a href="${res.driveUrl}" target="_blank">Drive Link</a></td>
                             <td><button class="btn btn-outline" style="padding: 5px 10px; color: red; border-color: red;" onclick="deleteResource('${res.slug}')">Delete</button></td>
                         `;
                         resourcesTableBody.appendChild(row);
