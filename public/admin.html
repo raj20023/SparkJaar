@@ -62,20 +62,46 @@
             </div>
             
             <div class="form-group">
-                <h4>Update Google Drive Link</h4>
+                <h4>Default Google Drive Link</h4>
+                <p style="font-size: 0.9em; margin-bottom: 5px;">This is the link given to users who visit your site normally (without a custom URL).</p>
                 <form id="link-form" style="display: flex; gap: 10px;">
                     <input type="url" id="driveLinkInput" placeholder="https://drive.google.com/..." required>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Save Default</button>
                 </form>
                 <p id="link-status" style="margin-top: 5px;"></p>
             </div>
 
-            <h4>Collected Emails</h4>
+            <div class="form-group" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <h4>Custom Resources Manager</h4>
+                <p style="font-size: 0.9em; margin-bottom: 15px;">Create custom URLs (e.g. <code>sparkjaar.com/?resource=guide1</code>). Viewers using this link will get the specific Drive URL below.</p>
+                <form id="resource-form" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" id="resourceSlug" placeholder="Slug (e.g. guide1)" required style="flex: 1;">
+                    <input type="url" id="resourceUrl" placeholder="Specific Google Drive URL" required style="flex: 2;">
+                    <button type="submit" class="btn btn-primary">Add Resource</button>
+                </form>
+                <p id="resource-status" style="margin-top: 5px;"></p>
+
+                <table style="margin-top: 10px;">
+                    <thead>
+                        <tr>
+                            <th>Slug (Custom Link ending)</th>
+                            <th>Google Drive Link</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resources-table-body">
+                        <!-- Data populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 style="margin-top: 40px;">Collected Emails</h4>
             <table>
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Resource Claimed</th>
                         <th>Date</th>
                     </tr>
                 </thead>

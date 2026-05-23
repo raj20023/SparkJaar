@@ -22,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.style.opacity = '0.8';
             submitBtn.disabled = true;
 
+            // Get resourceSlug from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const resourceSlug = urlParams.get('resource') || urlParams.get('r') || '';
+
             try {
                 const response = await fetch('/api/claim-resource', {
                     method: 'POST',
@@ -29,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ name: nameValue, email: emailValue })
+                    body: JSON.stringify({ name: nameValue, email: emailValue, resourceSlug })
                 });
 
                 const data = await response.json();

@@ -3,11 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const dashboardSection = document.getElementById('dashboard-section');
     const loginForm = document.getElementById('login-form');
     const linkForm = document.getElementById('link-form');
+    const resourceForm = document.getElementById('resource-form');
     const passwordInput = document.getElementById('adminPassword');
     const driveLinkInput = document.getElementById('driveLinkInput');
     const emailsTableBody = document.getElementById('emails-table-body');
+    const resourcesTableBody = document.getElementById('resources-table-body');
     const loginError = document.getElementById('login-error');
     const linkStatus = document.getElementById('link-status');
+    const resourceStatus = document.getElementById('resource-status');
     const logoutBtn = document.getElementById('logout-btn');
 
     let adminToken = localStorage.getItem('adminToken');
@@ -58,10 +61,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     row.innerHTML = `
                         <td>${user.name}</td>
                         <td>${user.email}</td>
+                        <td>${user.resourceSlug || 'default'}</td>
                         <td>${date}</td>
                     `;
                     emailsTableBody.appendChild(row);
                 });
+
+                resourcesTableBody.innerHTML = '';
+                if (data.resources) {
+                    data.resources.forEach(res => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${res.slug}</td>
+                            <td><a href="${res.driveUrl}" target="_blank">Link</a></td>
+                            <td><button class="btn btn-outline" style="padding: 5px 10px; color: red; border-color: red;" onclick="deleteResource('${res.slug}')">Delete</button></td>
+                        `;
+                        resourcesTableBody.appendChild(row);
+                    });
+                }
             } else if (res.status === 401 || res.status === 403) {
                 logoutBtn.click();
             }
@@ -122,6 +139,62 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = false;
         }
     });
+
+    resourceForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const slug = document.getElementById('resourceSlug').value.trim();
+        const driveUrl = document.getElementById('resourceUrl').value.trim();
+        const submitBtn = resourceForm.querySelector('button');
+        
+        submitBtn.disabled = true;
+        resourceStatus.innerText = 'Adding...';
+        resourceStatus.style.color = 'white';
+
+        try {
+            const res = await fetch('/api/admin/resource', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${adminToken}`
+                },
+                body: JSON.stringify({ slug, driveUrl })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                resourceStatus.innerText = 'Resource added successfully!';
+                resourceStatus.style.color = 'green';
+                document.getElementById('resourceSlug').value = '';
+                document.getElementById('resourceUrl').value = '';
+                fetchDashboardData();
+            } else {
+                throw new Error(data.error || 'Failed to add resource');
+            }
+        } catch (error) {
+            resourceStatus.innerText = error.message;
+            resourceStatus.style.color = 'red';
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+
+    window.deleteResource = async (slug) => {
+        if (!confirm(`Are you sure you want to delete the resource '${slug}'?`)) return;
+        try {
+            const res = await fetch(`/api/admin/resource/${slug}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${adminToken}`
+                }
+            });
+            if (res.ok) {
+                fetchDashboardData();
+            } else {
+                alert('Failed to delete resource');
+            }
+        } catch (err) {
+            alert('Error deleting resource');
+        }
+    };
 
     logoutBtn.addEventListener('click', () => {
         adminToken = null;
