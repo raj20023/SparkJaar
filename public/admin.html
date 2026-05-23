@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - SparkJaar</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: left;
+        }
+        th {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        #login-section, #dashboard-section {
+            display: none;
+        }
+        input[type="password"], input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container admin-container">
+        <h2>SparkJaar Admin Panel</h2>
+        
+        <div id="login-section" style="display: block;">
+            <p>Please enter the admin password:</p>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Admin Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p id="login-error" style="color: red; margin-top: 10px;"></p>
+        </div>
+
+        <div id="dashboard-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Dashboard</h3>
+                <button id="logout-btn" class="btn btn-outline">Logout</button>
+            </div>
+            
+            <div class="form-group">
+                <h4>Update Google Drive Link</h4>
+                <form id="link-form" style="display: flex; gap: 10px;">
+                    <input type="url" id="driveLinkInput" placeholder="https://drive.google.com/..." required>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+                <p id="link-status" style="margin-top: 5px;"></p>
+            </div>
+
+            <h4>Collected Emails</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="emails-table-body">
+                    <!-- Data populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

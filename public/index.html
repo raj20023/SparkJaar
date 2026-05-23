@@ -29,11 +29,19 @@
                     <h1>Parenting, <br><span class="italic-serif">Reimagined.</span></h1>
                     <p>We are challenging the toxic trends of modern parenting. We believe in empowering children, protecting their childhood, and preparing them for the real world. Join our mission to reach 10 Lakh children.</p>
                     
-                    <form class="waitlist-form" id="waitlist" action="#" method="POST">
-                        <input type="email" placeholder="Enter your email address" required aria-label="Email address">
-                        <button type="submit" class="btn btn-primary">Join the Waitlist</button>
-                    </form>
-                    <p class="micro-text">Be the first to get access to our 15-part Homeschooling Series.</p>
+                    <div id="form-container">
+                        <form class="waitlist-form" id="waitlist">
+                            <input type="text" id="userName" placeholder="Enter your full name" required aria-label="Full name" style="margin-bottom: 10px;">
+                            <input type="email" id="userEmail" placeholder="Enter your email address" required aria-label="Email address" style="margin-bottom: 10px;">
+                            <button type="submit" class="btn btn-primary">Get Access Now</button>
+                        </form>
+                        <p class="micro-text" id="form-message">Provide your details to get the Google Drive link.</p>
+                    </div>
+                    <div id="resource-container" style="display: none; background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 12px; margin-top: 20px; text-align: center;">
+                        <h3 style="margin-bottom: 10px;">Thank you!</h3>
+                        <p>Here is your free resource link:</p>
+                        <a id="drive-link" href="#" target="_blank" class="btn btn-primary" style="margin-top: 10px;">Open Google Drive Folder</a>
+                    </div>
                 </div>
                 <div class="hero-image-wrapper">
                     <img src="assets/images/hero.png" alt="A child learning curiously" class="hero-photo">
